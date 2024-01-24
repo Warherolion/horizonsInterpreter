@@ -1,0 +1,78 @@
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type=text/javascript>
+
+          $(function() {
+          $('a#connectMqtt').on('click', function(e) {
+            e.preventDefault()
+            $.getJSON('/background_process_test',
+                function(data) {
+              console.log("Hello world!");
+            });
+            return false;
+          });
+        });
+
+        $(function() {
+          $('a#disConnectMqtt').on('click', function(e) {
+            e.preventDefault()
+            $.getJSON('/mqttDisCon',
+                function(data) {
+
+            });
+            return false;
+          });
+        });
+
+
+
+      $(function() {
+        $('.planCheck').on('click', function() {
+            
+            var name = $(this).attr('value');
+            $.ajax({
+                    url: "{{url_for('planetChoice')}}",
+                    type : "GET",
+                    data: {
+                        'value': name 
+                    }
+                    }
+        )});
+        
+        });
+    
+        
+</script>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Telescope Control</title>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class='container'>
+       <h1>Server Control</h1>
+        <form>
+            <a href=# id='connectMqtt'><button class='btn btn-default'>Connect to MQTT Server</button></a>
+            <a href=# id='disConnectMqtt'><button class='btn btn-default'>Disconect from MQTT server</button></a>
+        </form>
+
+        <h1>Pick a celestial object to track</h1>
+        <form >
+          <a href='#'><button value='clest1' class='btn btn-default planCheck'>Mercury</button></a>
+          <a href="#"><button value='clest2' class='btn btn-default planCheck'>Moon</button></a>
+          <a href='#'><button value='clest3' class='btn btn-default planCheck'>Mars</button></a>
+          <a href='#'><button value='clest4' class='btn btn-default planCheck'>Jupiter</button></a>
+          <a href='#'><button value='clest5' class='btn btn-default planCheck'>Saturn</button></a>
+          <a href='#'><button value='clest6' class='btn btn-default planCheck'>Uranus</button></a>
+          <a href='#'><button value='clest7' class='btn btn-default planCheck'>Neptune</button></a>
+
+      </form>
+  </div>
+</body>
+</html>
+
+
